@@ -1,11 +1,22 @@
 const authController = {};
 
-authController.login = (req, res, next) => {
-  console.log('authController login invoked');
+authController.signup = (req, res, next) => {
+  console.log('💥 authController.signup');
+  const { username, password, passwordConfirm } = req.body;
+
+  res.send({ msg: 'authController - signup' });
 };
 
-authController.IslogggedIn = (req, res, next) => {
-  console.log('authController IsloggedIn invoked');
+authController.login = (req, res, next) => {
+  console.log('💥 authController.login');
+
+  res.send({ msg: 'authController - login' });
+};
+
+authController.logout = (req, res, next) => {
+  console.log('💥 authController.logout');
+
+  res.send({ msg: 'authController - logout' });
 };
 
 module.exports = authController;
