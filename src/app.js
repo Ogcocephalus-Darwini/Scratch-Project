@@ -2,8 +2,8 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 require('express-async-errors');
 const apiRouter = require('./routes');
 const errorHandler = require('./middlewares/error-handler');
@@ -28,14 +28,9 @@ app.use('/api', apiRouter);
 // Not Found Route Handler
 app.use('*', (req, res) => {
   throw new NotFoundError();
-  // res.status(404).json({ message: "Get requests aren't free buddy" });
 });
 
 //Error Handling
 app.use(errorHandler);
-// TEMP
-// app.use((err, _req, _res, _next) => {
-//   return res.status(500).json({ error: err });
-// });
 
 module.exports = app;
