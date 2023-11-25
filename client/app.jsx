@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import profile from './profile';
+import workOut from './main';
 
 const App = () => {
   const [userNameInput, setUsername] = useState('');
@@ -26,6 +28,8 @@ const App = () => {
     fetch('/', {
       method: 'POST',
       body: { uName, pWord },
+    }).then((res) => {
+      console.log(res);
     });
   };
 
@@ -33,6 +37,8 @@ const App = () => {
     fetch('/', {
       method: 'GET',
       body: { uName, pWord },
+    }).then((res) => {
+      console.log(res);
     });
   };
 
