@@ -4,23 +4,34 @@ const jwtSecret = require('../../jwt');
 const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
 
-const userSchema = new mongoose.Schema({
-  //userId created here
-  //information stored
-  username: {
-    type: String,
-    required: true,
-    unique: true,
+const userSchema = new mongoose.Schema(
+  {
+    //userId created here
+    //information stored
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    profilePicture: {
+      type: String,
+      default: null,
+    },
   },
-  password: {
-    type: String,
-    required: true,
+  {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+      },
+    },
   },
-  profilePicture: {
-    type: String,
-    default: null,
-  },
-});
+);
 
 // ====BCRYPT ENCRYPTION====
 //userProfile Password Encryptions using Bcrypt

@@ -4,6 +4,15 @@ const User = require('../models/user');
 
 const userController = {};
 
+userController.getCurrentUser = async (req, res) => {
+  console.log('💥 userController.getCurrentUser');
+  const { currentUser } = req;
+
+  if (!currentUser) throw new NotAuthorizedError();
+
+  res.status(200).json(currentUser);
+};
+
 userController.updateMe = async (req, res) => {
   console.log('💥 userController.updateMe');
 

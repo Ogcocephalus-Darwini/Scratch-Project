@@ -3,10 +3,11 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/app.jsx',
+  entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -28,7 +29,7 @@ module.exports = {
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -42,14 +43,15 @@ module.exports = {
     ],
   },
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, 'dist'),
       publicPath: '/',
     },
     port: 8080,
-    proxy: {
-      // '/api/**': 'http://localhost:3000',
-      // '/image/**': 'http://localhost:3000',
-    },
+    // proxy: {
+    // '/api/**': 'http://localhost:3000',
+    // '/image/**': 'http://localhost:3000',
+    // },
   },
 };
