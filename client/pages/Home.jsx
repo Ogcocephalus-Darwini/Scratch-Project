@@ -1,10 +1,11 @@
 import React from 'react';
-import Workout from '../workout.jsx';
+import Workout from '../components/workout.jsx';
+import Sets from '../components/set.jsx';
 
 const Home = () => {
   return (
     <div>
-      Home
+      <Workout />
     </div>
   );
 };
