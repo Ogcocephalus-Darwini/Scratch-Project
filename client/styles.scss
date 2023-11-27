@@ -1,0 +1,48 @@
+$shLg: 6px 6px 10px rgba(0, 0, 0, 0.35), 8px 8px 10px rgba(0, 0, 0, 0.25);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fafafa;
+}
+
+.col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border-radius: 15px;
+  background-color: rgb(103, 82, 111);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    background-color: rgb(189, 151, 194);
+    box-shadow: $shLg;
+  }
+}
+
+.highlighted {
+  color: blue;
+  cursor: pointer;
+}

@@ -1,72 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import profile from './profile';
-import workOut from './main';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Landing from './pages/Landing.jsx';
+import Home from './pages/Home.jsx';
 
 const App = () => {
-  const [userNameInput, setUsername] = useState('');
-
-  const [passwordInput, setPassword] = useState('');
-
-  const handleUsernameInput = (event) => {
-    return setUsername(event.target.value);
-  };
-
-  const handlePasswordInput = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSignUpClick = () => {
-    signUP(userNameInput, passwordInput);
-  };
-
-  const handleLoginClick = () => {
-    login(userNameInput, passwordInput);
-  };
-
-  const signUP = (uName, pWord) => {
-    fetch('/', {
-      method: 'POST',
-      body: { uName, pWord },
-    }).then((res) => {
-      console.log(res);
-    });
-  };
-
-  const login = (uName, pWord) => {
-    fetch('/', {
-      method: 'GET',
-      body: { uName, pWord },
-    }).then((res) => {
-      console.log(res);
-    });
-  };
-
   return (
-    <div>
-      <h1>Login</h1>
-
-      <label>
-        Username:
-        <input onChange={handleUsernameInput} value={userNameInput} type="text" name="name" />
-      </label>
-
-      <label>
-        Password:
-        <input onChange={handlePasswordInput} value={passwordInput} type="text" name="name" />
-      </label>
-
-      <button id="signup" onClick={handleClick}>
-        Sign Up
-      </button>
-      <button id="login" onClick={handleClick}>
-        Login
-      </button>
-
-      <h1> </h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="home" element={<Home />} />
+    </Routes>
   );
 };
 
-const root = createRoot(document.querySelector('#root'));
-root.render(<App />);
+export default App;
+
+/*
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello world!</div>,
+  },
+]);
+
+*/
