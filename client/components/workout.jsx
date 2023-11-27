@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Sets from './set.jsx';
+import { nanoid } from 'nanoid';
 import { useAppContext } from '../context/appContext.jsx';
 
 const Workout = () => {

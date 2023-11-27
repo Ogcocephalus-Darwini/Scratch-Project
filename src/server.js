@@ -18,9 +18,9 @@ const start = async () => {
   } catch (err) {
     throw new DatabaseConnectionError();
   }
-  await User.deleteMany();
-  await Workout.deleteMany();
-  await Exercise.deleteMany();
+  // await User.deleteMany();
+  // await Workout.deleteMany();
+  // await Exercise.deleteMany();
   app.listen(PORT, () => {
     console.log(`💥 App listening on port ${PORT}`);
   });

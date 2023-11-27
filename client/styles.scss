@@ -108,3 +108,27 @@ button,
   justify-content: start;
   align-items: center;
 }
+.profile {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3rem;
+  box-shadow: $shLg;
+}
+
+.streak-container {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+.streak-text {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.streak-gif {
+  width: 100px;
+  height: 100px;
+  margin: 0 1rem;
+}
