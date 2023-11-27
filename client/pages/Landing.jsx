@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context/appContext.jsx';
 import Loading from '../components/Loading.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
-  const { login, signup, isLoading } = useAppContext();
+  const { user, login, signup, isLoading } = useAppContext();
+  const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +16,9 @@ const Landing = () => {
 
     if (isLoginPage) {
       login(username, password);
+      setPassword('');
+      setUsername('');
+      setPasswordConfirm('');
     } else {
       if (password !== passwordConfirm) {
         setPassword('');
@@ -24,6 +29,13 @@ const Landing = () => {
       signup(username, password, passwordConfirm);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      navigate('/');
+    }
+  }, [user]);
 
   if (isLoading) {
     return <Loading />;
@@ -46,7 +58,7 @@ const Landing = () => {
         <input
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-          type="text"
+          type="password"
           name="name"
         />
       </label>
@@ -56,7 +68,7 @@ const Landing = () => {
           <input
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={passwordConfirm}
-            type="text"
+            type="password"
             name="name"
           />
         </label>

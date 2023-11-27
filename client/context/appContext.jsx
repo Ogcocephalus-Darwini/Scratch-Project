@@ -15,13 +15,22 @@ const AppContextProvider = ({ children }) => {
 
   const authFetch = axios.create({
     baseURL: 'http://localhost:5000/api',
+    withCredentials: true,
   });
+
+  const startLoading = () => {
+    dispatch({ type: actions.LOADING });
+  };
+
+  const stopLoading = () => {
+    dispatch({ type: actions.STOP_LOADING });
+  };
 
   const login = async (username, password) => {
     console.log('💥 Login - AppContext');
 
     try {
-      dispatch({ type: actions.LOADING });
+      startLoading();
       const response = await authFetch.post('/auth/login', {
         username,
         password,
@@ -31,7 +40,9 @@ const AppContextProvider = ({ children }) => {
       }, 1500);
     } catch (err) {
       console.log(err);
-      dispatch({ type: actions.STOP_LOADING });
+      setTimeout(() => {
+        stopLoading();
+      }, 1000);
     }
   };
 
@@ -40,24 +51,51 @@ const AppContextProvider = ({ children }) => {
     if (password !== passwordConfirm) return;
 
     try {
-      dispatch({ type: actions.LOADING });
+      startLoading();
       const response = await authFetch.post('/auth/signup', {
         username,
         password,
         passwordConfirm,
       });
       setTimeout(() => {
-        dispatch({ type: actions.SIGNUP, payload: { user: response.data } });
+        dispatch({ type: actions.SIGN_UP, payload: { user: response.data } });
       }, 1500);
     } catch (err) {
       console.log(err);
-      dispatch({ type: actions.STOP_LOADING });
+      setTimeout(() => {
+        stopLoading();
+      }, 1000);
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     console.log('💥 Logout - AppContext');
+    try {
+      startLoading();
+      const response = await authFetch.post('/auth/logout');
+      dispatch({ type: actions.LOGOUT });
+      stopLoading();
+    } catch (err) {
+      console.log(err);
+      stopLoading();
+    }
   };
+
+  const getCurrentUser = async () => {
+    try {
+      startLoading();
+      const response = await authFetch('/me');
+      if (!response.data.username) return dispatch({ type: actions.LOGOUT });
+      dispatch({ type: actions.LOGIN, payload: { user: response.data } });
+    } catch (err) {
+      // console.log(err);
+      stopLoading();
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <AppContext.Provider

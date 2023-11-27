@@ -7,6 +7,11 @@ const reducer = (state, action) => {
         ...state,
         isLoading: true,
       };
+    case actions.STOP_LOADING:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case actions.SIGN_UP:
       return {
         ...state,

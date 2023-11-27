@@ -7,7 +7,8 @@ const currentUser = async (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    throw new NotAuthorizedError();
+    // throw new NotAuthorizedError();
+    return res.send({});
   }
 
   try {
