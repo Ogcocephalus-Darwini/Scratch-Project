@@ -18,7 +18,7 @@ const UserProfile = () => {
 
   return (
     <div className="profile">
-      test
+      username:
       {/* <img src={user.avatar} alt={`${user.name}'s avatar`} /> */}
       <h2>{user ? user.username : 'null'}</h2>
       {/* <h2>Hey</h2> */}
