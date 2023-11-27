@@ -30,6 +30,18 @@ const reducer = (state, action) => {
         user: null,
         isLoading: false,
       };
+    case actions.CREATE_WORKOUT:
+      return {
+        ...state,
+        currentWorkout: action.payload.currentWorkout,
+        isLoading: false,
+      };
+    case actions.CREATE_EXERCISE:
+      return {
+        ...state,
+        exercises: [...state.exercises, action.payload.exercise],
+        isLoading: false,
+      };
     default:
       return state;
   }

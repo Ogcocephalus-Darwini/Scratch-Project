@@ -11,6 +11,12 @@ const Landing = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
+
   const handleSubmit = () => {
     if (!username || !password) return;
 
@@ -29,13 +35,6 @@ const Landing = () => {
       signup(username, password, passwordConfirm);
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      console.log(user);
-      navigate('/');
-    }
-  }, [user]);
 
   if (isLoading) {
     return <Loading />;

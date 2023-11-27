@@ -4,7 +4,7 @@ import Sets from '../components/set.jsx';
 
 const Home = () => {
   return (
-    <div>
+    <div className="col-center">
       <Workout />
     </div>
   );

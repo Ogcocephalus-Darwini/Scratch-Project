@@ -10,16 +10,16 @@ const Sets = (props) => {
   };
 
   return (
-    <div class="SingleSet">
+    <div className="SingleSet">
       <label htmlFor="reps">
         reps
         <input type="text" onChange={handleInput} value={reps} />
       </label>
       <label htmlFor="weights">
-        weights
+        weight
         <input type="text" onChange={handleInput} value={weights} />
       </label>
-      set
+      set {props.number}
     </div>
   );
 };

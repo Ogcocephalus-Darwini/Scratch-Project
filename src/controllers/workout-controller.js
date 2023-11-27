@@ -1,5 +1,8 @@
 // const BadRequestError = require('../errors/bad-request-error');
 
+const Exercise = require('../models/exercise');
+const Workout = require('../models/workout');
+
 const workoutController = {};
 
 workoutController.getAllWorkouts = async (req, res) => {
@@ -17,8 +20,16 @@ workoutController.getWorkout = async (req, res) => {
 
 workoutController.createWorkout = async (req, res) => {
   console.log('💥 workoutController.createWorkout');
+  const { currentUser } = req;
+  console.log(currentUser);
 
-  res.json({ message: 'createWorkout' });
+  const newWorkout = await Workout.create({
+    userId: currentUser._id,
+    date: new Date(Date.now()),
+    notes: '',
+  });
+
+  res.json(newWorkout);
 };
 
 workoutController.deleteWorkout = async (req, res) => {
@@ -29,8 +40,36 @@ workoutController.deleteWorkout = async (req, res) => {
 
 workoutController.createExercise = async (req, res) => {
   console.log('💥 workoutController.createExercise');
+  const { workoutId, exerciseName } = req.body;
+  console.log(workoutId);
+  console.log(exerciseName);
 
-  res.json({ message: 'createExercise' });
+  const newExercise = await Exercise.create({
+    workoutId,
+    name: exerciseName,
+    sets: [
+      {
+        target_reps: 10,
+        target_weight: 0,
+        actual_reps: 0,
+        actual_weight: 0,
+      },
+      {
+        target_reps: 10,
+        target_weight: 0,
+        actual_reps: 0,
+        actual_weight: 0,
+      },
+      {
+        target_reps: 10,
+        target_weight: 0,
+        actual_reps: 0,
+        actual_weight: 0,
+      },
+    ],
+  });
+
+  res.json(newExercise);
 };
 
 workoutController.updateExercise = async (req, res) => {

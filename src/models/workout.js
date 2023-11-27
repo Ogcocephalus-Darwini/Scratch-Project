@@ -5,7 +5,7 @@ const workoutSchema = new mongoose.Schema({
   //userId assighned by some logic
   userId: mongoose.Types.ObjectId,
   //information stored
-  date: String,
+  date: Date,
   notes: String,
 });
 

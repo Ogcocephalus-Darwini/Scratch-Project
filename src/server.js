@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const app = require('./app');
 const DatabaseConnectionError = require('./errors/db-connection-error');
+const User = require('./models/user');
+const Workout = require('./models/workout');
+const Exercise = require('./models/exercise');
 
 const PORT = process.env.PORT || 5000;
 
@@ -15,6 +18,9 @@ const start = async () => {
   } catch (err) {
     throw new DatabaseConnectionError();
   }
+  await User.deleteMany();
+  await Workout.deleteMany();
+  await Exercise.deleteMany();
   app.listen(PORT, () => {
     console.log(`💥 App listening on port ${PORT}`);
   });

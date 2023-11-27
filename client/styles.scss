@@ -24,7 +24,8 @@ body {
   align-items: center;
 }
 
-button {
+button,
+.button {
   border-radius: 15px;
   background-color: rgb(103, 82, 111);
   border: none;
@@ -57,7 +58,7 @@ button {
 }
 .shared-layout {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -81,4 +82,29 @@ button {
   height: 50px;
   border: 1px solid black;
   box-shadow: $shSm;
+}
+
+.workout-container {
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: $shSm;
+  padding: 2rem;
+}
+
+.set {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 2rem;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.set-sub {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 }

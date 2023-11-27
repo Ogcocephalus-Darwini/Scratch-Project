@@ -6,6 +6,8 @@ import reducer from './reducer';
 const initialState = {
   isLoading: false,
   user: null,
+  currentWorkout: null,
+  exercises: [],
 };
 
 const AppContext = React.createContext();
@@ -37,7 +39,7 @@ const AppContextProvider = ({ children }) => {
       });
       setTimeout(() => {
         dispatch({ type: actions.LOGIN, payload: { user: response.data } });
-      }, 1500);
+      }, 5000);
     } catch (err) {
       console.log(err);
       setTimeout(() => {
@@ -59,7 +61,7 @@ const AppContextProvider = ({ children }) => {
       });
       setTimeout(() => {
         dispatch({ type: actions.SIGN_UP, payload: { user: response.data } });
-      }, 1500);
+      }, 5000);
     } catch (err) {
       console.log(err);
       setTimeout(() => {
@@ -82,14 +84,45 @@ const AppContextProvider = ({ children }) => {
   };
 
   const getCurrentUser = async () => {
+    console.log('💥 Get Current User');
     try {
       startLoading();
       const response = await authFetch('/me');
-      if (!response.data.username) return dispatch({ type: actions.LOGOUT });
+      // console.log(response.data);
+      if (!response.data.username) {
+        // console.log('getCurrentUser logout');
+        return logout();
+      }
       dispatch({ type: actions.LOGIN, payload: { user: response.data } });
     } catch (err) {
       // console.log(err);
       stopLoading();
+    }
+  };
+
+  const createWorkout = async () => {
+    console.log('💥 Create Workout - appContext');
+    try {
+      startLoading();
+      const response = await authFetch.post('/workout');
+      console.log(response);
+      dispatch({ type: actions.CREATE_WORKOUT, payload: { currentWorkout: response.data } });
+      stopLoading();
+    } catch (err) {
+      console.log(err);
+      stopLoading();
+    }
+  };
+
+  const createExercise = async (exerciseName) => {
+    try {
+      const response = await authFetch.post('/workout/exercise', {
+        workoutId: state.currentWorkout._id,
+        exerciseName,
+      });
+      dispatch({ type: actions.CREATE_EXERCISE, payload: { exercise: response.data } });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -104,6 +137,11 @@ const AppContextProvider = ({ children }) => {
         login,
         signup,
         logout,
+        startLoading,
+        stopLoading,
+        getCurrentUser,
+        createWorkout,
+        createExercise,
       }}
     >
       {children}

@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing.jsx';
 import Home from './pages/Home.jsx';
-import { useAppContext } from './context/appContext.jsx';
 import SharedLayout from './pages/SharedLayout.jsx';
+import UserProfile from './pages/profile.jsx';
+import ProtectedRoute from './pages/ProtectedRoute.jsx';
 
 const App = () => {
-  const { user } = useAppContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/landing');
-    }
-  }, [user]);
-
   return (
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <SharedLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Home />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Route>
       <Route path="/landing" element={<Landing />} />
     </Routes>
