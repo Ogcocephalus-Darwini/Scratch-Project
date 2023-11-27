@@ -1,46 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import Sets from './set.jsx';
 
 const Workout = () => {
-  const set = () => {
-    return (
-      <div>
-        <label htmlFor="reps">
-          Reps
-          <input type="text" />
-        </label>
-        <label htmlFor="weights">
-          Weights
-          <input type="text" />
-        </label>
-        Set
-      </div>
-    );
-  };
+  const [sets, updateSets] = useState([<Sets />]);
+  const [] = useState();
 
-  const [sets, updateSets] = useState([set]);
-
-  const handleAddSets = () => {
+  const handleAddSets = (event) => {
     const newSets = [...sets];
-    newSets.push(set);
+    newSets.push(<Sets />);
     return updateSets(newSets);
   };
 
+  const handleInput = (event) => {
+    const { value } = event.target;
+    return;
+  };
+
   return (
-    <div class="WorkoutComponet">
+    <div className="WorkoutComponet">
       <label htmlFor="exercise">Exercises</label>
-      <select class="WorkoutDropList" name="excercise-names">
+      <select className="WorkoutDropList" name="excercise-names">
         <option value="bench">BB Bench Press</option>
         <option value="squat">BB Squat</option>
         <option value="de">BB Deadlift</option>
         <option value="row">BB Row</option>
         <option value="overhead">BB Overhead Press</option>
       </select>
-      <div class="SetsDisplay">
-        {/* {
-                sets.map(set => {
-                    <set/>
-                })
-            } */}
+      <div className="SetsDisplay">
+        {sets.map((set) => {
+          return set;
+        })}
       </div>
       <button onClick={handleAddSets}> Add Sets </button>
 
