@@ -1,5 +1,5 @@
 node_modules
 *.env
-env.fake.js
+jwt.js
 
 .DS_Store
