@@ -6,6 +6,7 @@ const currentUser = require('../middlewares/currentUser');
 
 const router = express.Router();
 
+// HOOKUP ROUTERS FOR DIFFERENT ENDPOINTS
 router.use('/auth', authRouter);
 router.use(currentUser);
 router.use('/me', userRouter);

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const exerciseSchema = new mongoose.Schema({
-  //workoutId assighned by some logic
+  // WORKOUT THAT EXERCISE BELONGS TO
   workoutId: mongoose.Types.ObjectId,
   //exercise type, or name
   name: String,
-  //Should be Initialized as an array, and populated
+  // INITIALIZE WITH ONE SET OBJECT
   sets: [
     {
       target_reps: Number,
