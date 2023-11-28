@@ -22,14 +22,13 @@ app.use(
     credentials: true,
   }),
 );
-//Initialization
 
 // Static Files
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, `../client/index.html`));
 });
 
-//Route-ing
+// HOOKUP THE BIG ROUTER - /routes/index.js
 app.use('/api', apiRouter);
 
 // Not Found Route Handler
@@ -37,7 +36,8 @@ app.use('*', (req, res) => {
   throw new NotFoundError();
 });
 
-//Error Handling
+// GLOBAL ERROR HANDLING MIDDLEWARE (defined in /middlewares folder)
+// CUSTOM ERROR TYPES DEFINED IN THE /errors FOLDER
 app.use(errorHandler);
 
 module.exports = app;

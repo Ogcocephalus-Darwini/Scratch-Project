@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const workoutSchema = new mongoose.Schema({
-  //workout Id created here
-  //userId assighned by some logic
+  // USER WHO WORKOUT BELONGS TO
   userId: mongoose.Types.ObjectId,
-  //information stored
+  // SET TO CURRENT DATE ON CREATION
   date: Date,
   notes: String,
 });
